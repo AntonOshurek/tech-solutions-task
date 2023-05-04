@@ -1,0 +1,32 @@
+:root {
+	--basic-font: 'Noto Sans', 'Arial', sans-serif;
+
+	--standart-white: #ffffff;
+	--standart-black: #000000;
+
+	--bg: #F7F8F9;
+	--border: #F1F2F4;
+	--surface: #FFFFFF;
+	--overlay: #4e4e4e1a;
+	--text-primary: #091E42;
+	--text-secondary: #626F86;
+	--primary: #da2c4d;
+	--text-inverse: #000000;
+
+	--item-linear-gradient: linear-gradient(298deg, #da2c4d, #f8ab37);
+
+	/* shadow */
+	--basic-overlay-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1);
+	--basic-overlay-hover-box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+	--basic-button-shadow: 0 5px 12px rgba(0, 0, 0, 0.3);
+
+	/* text sizes */
+	--basic-block-title-text-size: 28px;
+	--basic-block-title-text-weight: 600;
+	--year-range-text-size: 18px;
+	--year-range-text-weight: 500;
+	--service-item-text-size: 16px;
+	--service-item-text-weight: 500;
+	--submit-button-text-size: 18px;
+	--submit-button-text-weight: 500;
+}

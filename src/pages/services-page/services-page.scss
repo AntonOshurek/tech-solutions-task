@@ -1,0 +1,48 @@
+@import '../../variables/variables.scss';
+
+.services-page {
+	width: 100%;
+	height: 100%;
+	min-height: 100vh;
+}
+
+.services-page__main {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: flex-start;
+	gap: 30px;
+
+	padding: 40px 20px;
+
+	@media (max-width: $mobile-width) {
+		padding: 20px 10px;
+	}
+}
+
+.services-page__submit-button {
+	padding: 10px 20px;
+	border: none;
+	cursor: pointer;
+
+	font-family: var(--basic-font);
+	font-size: var(--submit-button-text-size);
+	font-weight: var(--submit-button-text-weight);
+	color: var(--standart-black);
+
+	box-shadow: var(--basic-button-shadow);
+	border-radius: 10px;
+	background-image: none;
+
+	transition: transform ease 0.1s;
+
+	&:hover {
+		background-image: var(--item-linear-gradient);
+		color: var(--standart-white);
+	}
+
+	&:active {
+		transform: scale(0.98);
+	}
+}
