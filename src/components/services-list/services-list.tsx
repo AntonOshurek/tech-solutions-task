@@ -28,16 +28,20 @@ const ServicesList = (): JSX.Element => {
 	}, [checkedService]);
 
 	return (
-		<ul className='services-list'>
-			{servicesList.map((service) => (
-				<ServiceListItem
-					onItemHandler={onServiceInputHandler}
-					key={service.id}
-					serviceItem={service}
-					checked={checkedService[service.id]}
-				/>
-			))}
-		</ul>
+		<div className='services-list'>
+			<h2 className='services-list__title'>Wybierz usługę</h2>
+
+			<ul className='services-list__list'>
+				{servicesList.map((service) => (
+					<ServiceListItem
+						onItemHandler={onServiceInputHandler}
+						key={service.id}
+						serviceItem={service}
+						checked={checkedService[service.id]}
+					/>
+				))}
+			</ul>
+		</div>
 	);
 };
 

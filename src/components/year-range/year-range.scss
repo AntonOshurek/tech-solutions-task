@@ -1,0 +1,217 @@
+.year-range {
+	width: 300px;
+}
+
+.year-range__wrap {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	gap: 10px;
+}
+
+.year-range__title {
+	font-family: var(--basic-font);
+	font-size: var(--basic-block-title-text-size);
+	font-weight: var(--basic-block-title-text-weight);
+	color: var(--text-primary);
+}
+
+.year-range__set {
+	--input-height: 80px;
+	--thumb-diameter: 20px;
+	--thumb-radius: calc(var(--thumb-diameter) / 2);
+	--diff: calc(var(--max) - var(--min));
+	--track-weight: 2px;
+	--track-length: calc(100% + 0px);
+	--track-color: hsl(203deg 11% 86%);
+	--bar-color: var(--primary);
+	--relative-a: calc((var(--a) - var(--min)) / var(--diff));
+	--relative-b: calc((var(--b) - var(--min)) / var(--diff));
+	--bar-length-max: calc(var(--track-length) - var(--thumb-diameter));
+	--bar-a: calc(var(--relative-a) * var(--bar-length-max) + var(--thumb-radius));
+	--bar-b: calc(var(--relative-b) * var(--bar-length-max) + var(--thumb-radius));
+	--bar-start: min(var(--bar-a), var(--bar-b));
+	--bar-end: max(var(--bar-a), var(--bar-b));
+	--b-a: calc(var(--b) - var(--a));
+	--hyper-b-a: calc(var(--b-a) * 999999);
+	--is-b-greater-then-a: clamp(0, var(--hyper-b-a), 1);
+	--placement-output-a: calc(5 - 3 * var(--is-b-greater-then-a));
+	--placement-output-b: calc(2 + 3 * var(--is-b-greater-then-a));
+
+	display: grid;
+	grid-template-columns: repeat(2, max-content) 1fr repeat(2, max-content);
+	grid-template-rows: max-content max-content;
+	grid-template-areas:
+		"input   input    input   input    input"
+		"labal-a output-a   .   label-b output-b"
+	;
+	row-gap: 5px;
+	column-gap: 12px;
+	position: relative;
+	width: 100%;
+	border: 0;
+
+	&::before {
+		content: "";
+		grid-area: input;
+		background: var(--surface);
+		border-radius: 3px;
+		box-shadow: var(--basic-overlay-box-shadow);
+	}
+}
+
+.year-range__input {
+	appearance: none;
+	grid-area: input;
+	z-index: 1;
+	margin: 0;
+	padding: calc((var(--input-height) - var(--thumb-diameter)) / 2) 20px;
+	background: none;
+	border-radius: 3px;
+	pointer-events: none;
+	color: inherit;
+	height: var(--thumb-diameter);
+
+
+
+	&:focus {
+		z-index: 2;
+		outline: 2px solid currentColor;
+		outline-offset: 2px;
+		box-shadow: var(--basic-overlay-box-shadow);
+	}
+
+	&:focus:not(:focus-visible) {
+		outline: none;
+	}
+
+	&:focus-visible {
+		outline: 2px solid currentColor;
+		outline-offset: 2px;
+	}
+
+	&::-webkit-slider-runnable-track {
+		appearance: none;
+		height: var(--track-d);
+	}
+
+	&::-webkit-slider-container {
+		appearance: none;
+		align-self: center;
+		height: var(--track-weight);
+		background-image:
+			linear-gradient(90deg,
+				var(--track-color) calc(var(--bar-start) - var(--thumb-radius)),
+				transparent calc(var(--bar-start) - var(--thumb-radius)),
+				transparent calc(var(--bar-start) + var(--thumb-radius)),
+				var(--bar-color) calc(var(--bar-start) + var(--thumb-radius)),
+				var(--bar-color) calc(var(--bar-end) - var(--thumb-radius)),
+				transparent calc(var(--bar-end) - var(--thumb-radius)),
+				transparent calc(var(--bar-end) + var(--thumb-radius)),
+				var(--track-color) calc(var(--bar-end) + var(--thumb-radius)));
+	}
+
+	&::-moz-range-track {
+		appearance: none;
+		height: var(--track-weight);
+		background-image:
+			linear-gradient(90deg,
+				var(--track-color) calc(var(--bar-start) - var(--thumb-radius)),
+				transparent calc(var(--bar-start) - var(--thumb-radius)),
+				transparent calc(var(--bar-start) + var(--thumb-radius)),
+				var(--bar-color) calc(var(--bar-start) + var(--thumb-radius)),
+				var(--bar-color) calc(var(--bar-end) - var(--thumb-radius)),
+				transparent calc(var(--bar-end) - var(--thumb-radius)),
+				transparent calc(var(--bar-end) + var(--thumb-radius)),
+				var(--track-color) calc(var(--bar-end) + var(--thumb-radius)));
+	}
+
+	&::-webkit-slider-thumb {
+		appearance: none;
+		box-sizing: border-box;
+		width: var(--thumb-diameter);
+		height: var(--thumb-diameter);
+		border: 8px solid hsl(0 0% 100% / 1);
+		background: none;
+		background-color: hsl(0deg 0% 67% / 1);
+		border-radius: var(--thumb-radius);
+		box-shadow: 0px 2px 1px var(--shadow-spread, 0px) hsl(0 0% 0% / 0.15);
+		pointer-events: auto;
+		cursor: grab;
+	}
+
+	&::-moz-range-thumb {
+		appearance: none;
+		box-sizing: border-box;
+		width: var(--thumb-diameter);
+		height: var(--thumb-diameter);
+		border: 8px solid hsl(0 0% 100% / 1);
+		background: none;
+		background-color: hsl(0deg 0% 67% / 1);
+		border-radius: var(--thumb-radius);
+		box-shadow: 0px 2px 1px var(--shadow-spread, 0px) hsl(0 0% 0% / 0.15);
+		pointer-events: auto;
+		cursor: grab;
+	}
+
+	&::-moz-range-thumb:active {
+		cursor: grabbing;
+	}
+
+	&::-webkit-slider-thumb:active {
+		cursor: grabbing;
+	}
+
+	&:focus::-webkit-slider-thumb {
+		--shadow-spread: 1px;
+	}
+
+	&:focus::-moz-range-thumb {
+		--shadow-spread: 1px;
+	}
+}
+
+.year-range__label {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	font-family: var(--basic-font);
+	font-size: var(--year-range-text-size);
+	font-weight: var(--year-range-text-weight);
+	color: var(--text-primary);
+
+	&--a {
+		grid-area: labal-a;
+	}
+
+	&--b {
+		grid-area: label-b;
+	}
+}
+
+.year-range__output {
+	width: 80px;
+	padding: 8px 0;
+
+	font-family: var(--basic-font);
+	font-size: var(--year-range-text-size);
+	font-weight: var(--year-range-text-weight);
+	color: var(--text-primary);
+
+	text-align: center;
+	border-radius: 10px;
+	background-color: var(--surface);
+	box-shadow: var(--basic-overlay-box-shadow);
+
+	&--a {
+		grid-area: output-a;
+		grid-column: var(--placement-output-a);
+	}
+
+	&--b {
+		grid-area: output-b;
+		grid-column: var(--placement-output-b);
+	}
+}

@@ -1,6 +1,6 @@
 import { CSSProperties, ChangeEvent, useState } from 'react';
 //styles
-import './custom-range.scss';
+import './year-range.scss';
 
 const enum rangeValuesNames {
 	A = 'a',
@@ -12,7 +12,7 @@ interface IRangeValuesStateType {
 	[rangeValuesNames.B]: number;
 }
 
-const CustomRange = (): JSX.Element => {
+const YearRange = (): JSX.Element => {
 	const MIN_VALUE = 2020;
 	const MAX_VALUE = 2025;
 	const RANGE_STEP = 1;
@@ -34,9 +34,9 @@ const CustomRange = (): JSX.Element => {
 	};
 
 	return (
-		<div className='custom-range'>
+		<div className='year-range'>
 			<div
-				className='custom-range__wrap'
+				className='year-range__wrap'
 				style={
 					{
 						'--a': rangeValues.a,
@@ -46,18 +46,22 @@ const CustomRange = (): JSX.Element => {
 					} as CSSProperties
 				}
 			>
-				<h3>Wybierz rok</h3>
+				<h3 className='year-range__title'>Wybierz rok</h3>
 
-				<div className='range-set'>
-					<label className='label label-a' htmlFor='a' aria-label='Первое значение диапазона'>
+				<div className='year-range__set'>
+					<label
+						className='year-range__label year-range__label--a'
+						htmlFor='a'
+						aria-label='Wartość pierwszego zakresu'
+					>
 						Od
 					</label>
-					<output className='output output-a' name='a' htmlFor='a'>
+					<output className='year-range__output year-range__output--a' name='a' htmlFor='a'>
 						{rangeValues.a}
 					</output>
 					<input
 						onInput={handleInput}
-						className='range-input range-input-a'
+						className='year-range__input'
 						id={rangeValuesNames.A}
 						name='price-range'
 						type='range'
@@ -66,15 +70,19 @@ const CustomRange = (): JSX.Element => {
 						max={MAX_VALUE}
 						step={RANGE_STEP}
 					/>
-					<label className='label label-b' htmlFor='b' aria-label='Второе значение диапазона'>
+					<label
+						className='year-range__label year-range__label--b'
+						htmlFor='b'
+						aria-label='Wartość drugiego zakresu'
+					>
 						Do
 					</label>
-					<output className='output output-b' name='b' htmlFor='b'>
+					<output className='year-range__output year-range__output--b' name='b' htmlFor='b'>
 						{rangeValues.b}
 					</output>
 					<input
 						onInput={handleInput}
-						className='range-input range-input-b'
+						className='year-range__input'
 						id={rangeValuesNames.B}
 						name='price-range'
 						type='range'
@@ -89,4 +97,4 @@ const CustomRange = (): JSX.Element => {
 	);
 };
 
-export default CustomRange;
+export default YearRange;
