@@ -1,5 +1,11 @@
+@import '../../variables/variables.scss';
+
 .year-range {
 	width: 300px;
+
+	@media (max-width: 400px) {
+		width: 100%;
+	}
 }
 
 .year-range__wrap {
