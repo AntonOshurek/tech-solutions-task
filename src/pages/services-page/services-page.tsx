@@ -1,5 +1,5 @@
 //components
-import { CustomRange, ServicesList } from '../../components';
+import { CustomRange, ServicesList, SelectedServicesResultat } from '../../components';
 //styles
 import './services-page.scss';
 
@@ -13,9 +13,11 @@ const ServicesPage = (): JSX.Element => {
 
 				<ServicesList />
 
-				<section className='choice-result'></section>
+				<SelectedServicesResultat />
 
-				<button type='button'>submit</button>
+				<button className='services-page__submit-button' type='button'>
+					Zamów usługi
+				</button>
 			</main>
 		</div>
 	);
