@@ -1,5 +1,5 @@
 //components
-import { CustomRange } from '../../components';
+import { CustomRange, ServicesList } from '../../components';
 //styles
 import './services-page.scss';
 
@@ -11,7 +11,7 @@ const ServicesPage = (): JSX.Element => {
 
 				<CustomRange />
 
-				<div className='services-list'></div>
+				<ServicesList />
 
 				<section className='choice-result'></section>
 
