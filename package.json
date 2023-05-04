@@ -54,5 +54,9 @@
 		"eslint-plugin-prettier": "^4.2.1",
 		"prettier": "^2.8.6",
 		"gh-pages": "^5.0.0"
+	},
+		"prettier": {
+		"singleQuote": true,
+		"jsxSingleQuote": true
 	}
 }
