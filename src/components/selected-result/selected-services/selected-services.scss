@@ -1,0 +1,21 @@
+.selected-services {
+	width: 100%;
+}
+
+.selected-services__title {
+	font-family: var(--basic-font);
+	font-size: var(--selected-service-title-size);
+	font-weight: var(--selected-service-title-weight);
+	color: var(--text-primary);
+}
+
+.selected-services__list {
+	list-style: none;
+}
+
+.selected-services__item {
+	font-family: var(--basic-font);
+		font-size: var(--selected-service-text-size);
+		font-weight: var(--selected-service-text-weight);
+		color: var(--text-primary);
+}

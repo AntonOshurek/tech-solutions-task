@@ -7,7 +7,7 @@ import { setYearsAction } from '../../store/slices/app-slice';
 //variables
 import { yearsRangeValuesNames } from '../../variables/variables';
 //types
-import type { IYearsDataType } from '../../types/store-data-types';
+import type { IYearsDataType } from '../../types/data-types';
 //styles
 import './year-range.scss';
 

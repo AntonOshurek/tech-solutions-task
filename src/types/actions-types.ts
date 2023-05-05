@@ -1,5 +1,5 @@
 //types
-import type { IYearsDataType, ICheckedServiceDataType } from './store-data-types';
+import type { IYearsDataType, ICheckedServiceDataType } from './data-types';
 
 export interface ISetServicesActionType {
 	services: ICheckedServiceDataType;

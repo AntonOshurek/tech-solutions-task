@@ -8,7 +8,7 @@ export type ServicesItemsType = IServiceItemType[];
 
 export interface IServicesPricesType {
 	[name: string]: {
-		[year: number]: number;
+		[name: number]: number;
 	};
 }
 

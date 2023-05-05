@@ -1,13 +1,5 @@
-import { yearsRangeValuesNames } from '../variables/variables';
-
-export interface ICheckedServiceDataType {
-	[name: string]: boolean;
-}
-
-export interface IYearsDataType {
-	[yearsRangeValuesNames.A]: number;
-	[yearsRangeValuesNames.B]: number;
-}
+//types
+import { ICheckedServiceDataType, IYearsDataType } from './data-types';
 
 export interface IStoreDataType {
 	services: ICheckedServiceDataType;

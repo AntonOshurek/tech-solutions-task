@@ -7,7 +7,7 @@ import ServiceListItem from './service-item/service-list-item';
 import { useAppDispatch } from '../../utils/hooks';
 import { setServicesAction } from '../../store/slices/app-slice';
 //types
-import type { ICheckedServiceDataType } from '../../types/store-data-types';
+import type { ICheckedServiceDataType } from '../../types/data-types';
 //utils
 import { transformServicesListToState } from '../../utils/auxiliary';
 //styles
@@ -30,7 +30,6 @@ const ServicesList = (): JSX.Element => {
 	};
 
 	useEffect(() => {
-		console.log(checkedService);
 		dispatch(setServicesAction({ services: checkedService }));
 	}, [checkedService]);
 
