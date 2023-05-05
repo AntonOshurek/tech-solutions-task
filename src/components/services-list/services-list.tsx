@@ -1,20 +1,26 @@
 import { ChangeEvent, useEffect, useState } from 'react';
+//services
+import servicesDataService from '../../services/services-data.service';
 //components
 import ServiceListItem from './service-item/service-list-item';
-//data
-import { servicesList } from '../../data/servicesData';
+//store
+import { useAppDispatch } from '../../utils/hooks';
+import { setServicesAction } from '../../store/slices/app-slice';
 //types
-import type { IInitialCheckedServiceStateType } from '../../types/components-types';
+import type { ICheckedServiceDataType } from '../../types/store-data-types';
 //utils
 import { transformServicesListToState } from '../../utils/auxiliary';
 //styles
 import './services-list.scss';
 
 const ServicesList = (): JSX.Element => {
-	const initialServiceListState = transformServicesListToState(servicesList);
+	const servicesData = servicesDataService.getServices();
+	const initialServiceListState = transformServicesListToState(servicesData);
+
+	const dispatch = useAppDispatch();
 
 	const [checkedService, setCheckedService] =
-		useState<IInitialCheckedServiceStateType>(initialServiceListState);
+		useState<ICheckedServiceDataType>(initialServiceListState);
 
 	const onServiceInputHandler = (evt: ChangeEvent<HTMLInputElement>) => {
 		setCheckedService({
@@ -24,7 +30,8 @@ const ServicesList = (): JSX.Element => {
 	};
 
 	useEffect(() => {
-		// console.log(checkedService);
+		console.log(checkedService);
+		dispatch(setServicesAction({ services: checkedService }));
 	}, [checkedService]);
 
 	return (
@@ -32,7 +39,7 @@ const ServicesList = (): JSX.Element => {
 			<h2 className='services-list__title'>Wybierz usługę</h2>
 
 			<ul className='services-list__list'>
-				{servicesList.map((service) => (
+				{servicesData.map((service) => (
 					<ServiceListItem
 						onItemHandler={onServiceInputHandler}
 						key={service.id}
