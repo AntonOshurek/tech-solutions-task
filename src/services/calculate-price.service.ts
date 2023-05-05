@@ -13,16 +13,39 @@ class CalculatePriceService {
 	}
 
 	calculate(services: string[], years: number[]): number {
-		let resultPrice = 0;
+		const resultPrice = 0;
+		// let discountPrice = null;
 
-		for (const service of services) {
-			for (const year of years) {
-				const price = this.prices[service][year];
-				if (price) {
-					resultPrice += price;
-				}
-			}
-		}
+		// console.log(services);
+
+		// this.discounts.forEach((disc) => {
+		// 	const setDiscount = disc.services.every((item) => services.includes(item));
+		// 	if (setDiscount) {
+		// 		console.log('discount - ' + disc.price);
+		// 		discountPrice = disc.price;
+		// 	}
+		// });
+
+		// for (const service of services) {
+		// 	for (const year of years) {
+		// 		let price: number;
+
+		// 		if (discountPrice) {
+		// 			console.log('discountPrice - ' + discountPrice);
+		// 			price = discountPrice;
+		// 		} else {
+		// 			price = this.prices[service][year];
+		// 		}
+
+		// 		console.log('price - ' + price);
+
+		// 		if (price) {
+		// 			console.log('resultPrice before - ' + resultPrice);
+		// 			resultPrice += price;
+		// 			console.log('resultPrice after - ' + resultPrice);
+		// 		}
+		// 	}
+		// }
 
 		return resultPrice;
 	}
