@@ -16,7 +16,7 @@ export const appSlice = createSlice({
 		},
 		setYears: (state, action: PayloadAction<ISetYearsActionType>) => {
 			const { years } = action.payload;
-			state.years = years;
+			state.yearsRange = years;
 		},
 	},
 });

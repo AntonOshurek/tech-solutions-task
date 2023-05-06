@@ -7,31 +7,31 @@ import { setYearsAction } from '../../store/slices/app-slice';
 //variables
 import { yearsRangeValuesNames } from '../../variables/variables';
 //types
-import type { IYearsDataType } from '../../types/data-types';
+import type { IYearsRangeDataType } from '../../types/data-types';
 //styles
 import './year-range.scss';
 
 const YearRange = (): JSX.Element => {
 	const servicesYearsData = servicesDataService.getYears();
-	const MIN_VALUE = Math.min(...servicesYearsData);
-	const MAX_VALUE = Math.max(...servicesYearsData);
-	const RANGE_STEP = 1;
+	const MIN_YEAR = Math.min(...servicesYearsData);
+	const MAX_YEAR = Math.max(...servicesYearsData);
+	const YEAR_RANGE_STEP = 1;
 
 	const dispatch = useAppDispatch();
 
-	const initialRangeState: IYearsDataType = {
-		[yearsRangeValuesNames.A]: MIN_VALUE,
-		[yearsRangeValuesNames.B]: MAX_VALUE,
+	const initialRangeState: IYearsRangeDataType = {
+		[yearsRangeValuesNames.A]: MIN_YEAR,
+		[yearsRangeValuesNames.B]: MAX_YEAR,
 	};
 
-	const [rangeValues, setRangeValues] = useState<IYearsDataType>(initialRangeState);
+	const [rangeValues, setRangeValues] = useState<IYearsRangeDataType>(initialRangeState);
 
 	const handleInput = (event: ChangeEvent<HTMLInputElement>) => {
-		const et = event.target;
+		const evt = event.target;
 
 		setRangeValues({
 			...rangeValues,
-			[et.id]: +et.value,
+			[evt.id]: +evt.value,
 		});
 	};
 
@@ -47,8 +47,8 @@ const YearRange = (): JSX.Element => {
 					{
 						'--a': rangeValues.a,
 						'--b': rangeValues.b,
-						'--min': MIN_VALUE,
-						'--max': MAX_VALUE,
+						'--min': MIN_YEAR,
+						'--max': MAX_YEAR,
 					} as CSSProperties
 				}
 			>
@@ -71,10 +71,10 @@ const YearRange = (): JSX.Element => {
 						id={yearsRangeValuesNames.A}
 						name='price-range'
 						type='range'
-						min={MIN_VALUE}
+						min={MIN_YEAR}
 						value={rangeValues.a}
-						max={MAX_VALUE}
-						step={RANGE_STEP}
+						max={MAX_YEAR}
+						step={YEAR_RANGE_STEP}
 					/>
 					<label
 						className='year-range__label year-range__label--b'
@@ -92,10 +92,10 @@ const YearRange = (): JSX.Element => {
 						id={yearsRangeValuesNames.B}
 						name='price-range'
 						type='range'
-						min={MIN_VALUE}
+						min={MIN_YEAR}
 						value={rangeValues.b}
-						max={MAX_VALUE}
-						step={RANGE_STEP}
+						max={MAX_YEAR}
+						step={YEAR_RANGE_STEP}
 					/>
 				</div>
 			</div>

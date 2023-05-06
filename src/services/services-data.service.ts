@@ -4,8 +4,6 @@ import { servicesData } from '../data/servicesData';
 import type {
 	IServicesDataType,
 	ServicesItemsType,
-	IServicesPricesType,
-	ServicesDiscountsType,
 	ServicesYearsType,
 } from '../types/services-data-types';
 
@@ -19,14 +17,6 @@ class ServicesDataService {
 
 	getServices(): ServicesItemsType {
 		return this.servicesData.services;
-	}
-
-	getPrices(): IServicesPricesType {
-		return this.servicesData.prices;
-	}
-
-	getDiscounts(): ServicesDiscountsType {
-		return this.servicesData.discounts;
 	}
 
 	getYears(): ServicesYearsType {

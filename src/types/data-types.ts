@@ -1,16 +1,7 @@
 //variables
 import { yearsRangeValuesNames } from '../variables/variables';
 
-export interface ITransformedDataToCalculate {
-	years: number[];
-	services: string[];
-}
-
-export interface ICheckedServiceDataType {
-	[name: string]: boolean;
-}
-
-export interface IYearsDataType {
+export interface IYearsRangeDataType {
 	[yearsRangeValuesNames.A]: number;
 	[yearsRangeValuesNames.B]: number;
 }

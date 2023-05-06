@@ -1,16 +1,16 @@
 //services
 import servicesDataService from './services-data.service';
 //types
-import type { IServicesPricesType, ServicesDiscountsType } from '../types/services-data-types';
+// import type { ServicesDiscountsType } from '../types/services-data-types';
 
 class CalculatePriceService {
-	private prices: IServicesPricesType;
-	private discounts: ServicesDiscountsType;
+	// private prices: IServicesPricesType;
+	// private discounts: ServicesDiscountsType;
 
-	constructor(prices: IServicesPricesType, discounts: ServicesDiscountsType) {
-		this.prices = prices;
-		this.discounts = discounts;
-	}
+	// constructor(prices: IServicesPricesType, discounts: ServicesDiscountsType) {
+	// 	this.prices = prices;
+	// 	this.discounts = discounts;
+	// }
 
 	calculate(services: string[], years: number[]): number {
 		const resultPrice = 0;
@@ -51,9 +51,9 @@ class CalculatePriceService {
 	}
 }
 
-const calculatePriceService = new CalculatePriceService(
-	servicesDataService.getPrices(),
-	servicesDataService.getDiscounts(),
-);
+// const calculatePriceService = new CalculatePriceService(
+// 	servicesDataService.getPrices(),
+// 	servicesDataService.getDiscounts(),
+// );
 
-export default calculatePriceService;
+// export default calculatePriceService;
