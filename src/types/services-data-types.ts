@@ -1,4 +1,5 @@
 export interface IServiceDiscount {
+	discountName: string;
 	services: string[];
 	prices: { [year: number]: number };
 }
@@ -9,6 +10,7 @@ export interface IServiceItemType {
 	value: string;
 	prices: { [year: number]: number };
 	discounts?: IServiceDiscount[];
+	free?: string[];
 }
 
 export type ServicesItemsType = IServiceItemType[];
