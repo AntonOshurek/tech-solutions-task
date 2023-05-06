@@ -9,12 +9,24 @@ export const servicesData: IServicesDataType = {
 			id: nanoid(),
 			value: 'internet',
 			prices: { 2023: 39, 2024: 49, 2025: 59 },
+			discounts: [
+				{
+					services: ['internet', 'television'],
+					prices: { 2023: 79, 2024: 79, 2025: 79 },
+				},
+			],
 		},
 		{
 			name: 'Telewizja',
 			id: nanoid(),
 			value: 'television',
 			prices: { 2023: 49, 2024: 49, 2025: 59 },
+			discounts: [
+				{
+					services: ['internet', 'television'],
+					prices: { 2023: 79, 2024: 79, 2025: 79 },
+				},
+			],
 		},
 		{
 			name: 'Abonament telefoniczny',
