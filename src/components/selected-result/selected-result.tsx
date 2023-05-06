@@ -1,5 +1,5 @@
 //services
-// import calculatePriceService from '../../services/calculate-price.service';
+import calculatePriceService from '../../services/calculate-price.service';
 //components
 import SelectedYears from './selected-years/selected-years';
 import SelectedServices from './selected-services/selected-services';
@@ -15,7 +15,7 @@ const SelectedResultat = (): JSX.Element => {
 	const selectedServices: ServicesItemsType = useAppSelector(SelectorGetServicesState);
 	const selectedYears = useAppSelector(SelectorGetYearsState);
 
-	// const price = calculatePriceService.calculate(dataToCalculate.services, dataToCalculate.years);
+	const price = calculatePriceService.calculate(selectedServices, selectedYears);
 
 	return (
 		<section className='services-result'>
@@ -24,7 +24,7 @@ const SelectedResultat = (): JSX.Element => {
 			<SelectedYears years={selectedYears} />
 			<SelectedServices selectedServices={selectedServices} />
 
-			{/* <p>{price ? `Całkowity koszt usług - ${price} zł` : null}</p> */}
+			<p>{price ? `Całkowity koszt usług - ${price} zł` : null}</p>
 		</section>
 	);
 };
