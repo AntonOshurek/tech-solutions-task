@@ -1,30 +1,36 @@
 import { ChangeEvent, useEffect, useState } from 'react';
+//services
+import servicesDataService from '../../services/services-data.service';
 //components
 import ServiceListItem from './service-item/service-list-item';
-//data
-import { servicesList } from '../../data/servicesData';
+//store
+import { useAppDispatch } from '../../utils/hooks';
+import { setServicesAction } from '../../store/slices/app-slice';
 //types
-import type { IInitialCheckedServiceStateType } from '../../types/components-types';
-//utils
-import { transformServicesListToState } from '../../utils/auxiliary';
+import type { IServiceItemType, ServicesItemsType } from '../../types/services-data-types';
 //styles
 import './services-list.scss';
 
 const ServicesList = (): JSX.Element => {
-	const initialServiceListState = transformServicesListToState(servicesList);
+	const servicesData = servicesDataService.getServices();
+	const dispatch = useAppDispatch();
 
-	const [checkedService, setCheckedService] =
-		useState<IInitialCheckedServiceStateType>(initialServiceListState);
+	const [checkedService, setCheckedService] = useState<ServicesItemsType>([]);
 
-	const onServiceInputHandler = (evt: ChangeEvent<HTMLInputElement>) => {
-		setCheckedService({
-			...checkedService,
-			[evt.target.value]: !checkedService[evt.target.value],
+	const onServiceInputHandler = (item: IServiceItemType): void => {
+		setCheckedService((prev) => {
+			let result: ServicesItemsType;
+			if (prev.find((prevItem) => prevItem.id === item.id)) {
+				result = prev.filter((p) => p !== item);
+			} else {
+				result = [...prev, item];
+			}
+			return result;
 		});
 	};
 
 	useEffect(() => {
-		// console.log(checkedService);
+		dispatch(setServicesAction({ services: checkedService }));
 	}, [checkedService]);
 
 	return (
@@ -32,12 +38,12 @@ const ServicesList = (): JSX.Element => {
 			<h2 className='services-list__title'>Wybierz usługę</h2>
 
 			<ul className='services-list__list'>
-				{servicesList.map((service) => (
+				{servicesData.map((service) => (
 					<ServiceListItem
 						onItemHandler={onServiceInputHandler}
 						key={service.id}
 						serviceItem={service}
-						checked={checkedService[service.id]}
+						checked={checkedService.find((item) => item.id === service.id) ? true : false}
 					/>
 				))}
 			</ul>

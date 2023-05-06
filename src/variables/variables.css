@@ -23,6 +23,14 @@
 	/* text sizes */
 	--basic-block-title-text-size: 28px;
 	--basic-block-title-text-weight: 600;
+	--selected-years-title-size: 20px;
+	--selected-years-title-weight: 600;
+	--selected-years-text-size: 18px;
+	--selected-years-text-weight: 400;
+	--selected-service-title-size: 20px;
+	--selected-service-title-weight: 600;
+	--selected-service-text-size: 18px;
+	--selected-service-text-weight: 400;
 	--year-range-text-size: 18px;
 	--year-range-text-weight: 500;
 	--service-item-text-size: 16px;

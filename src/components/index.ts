@@ -1,5 +1,5 @@
 import YearRange from './year-range/year-range';
 import ServicesList from './services-list/services-list';
-import SelectedServicesResultat from './selected-services-result/selected-services-result';
+import SelectedResultat from './selected-result/selected-result';
 
-export { YearRange, ServicesList, SelectedServicesResultat };
+export { YearRange, ServicesList, SelectedResultat };

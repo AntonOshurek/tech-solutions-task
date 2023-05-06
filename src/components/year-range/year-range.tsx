@@ -1,37 +1,43 @@
-import { CSSProperties, ChangeEvent, useState } from 'react';
+import { CSSProperties, ChangeEvent, useEffect, useState } from 'react';
+//services
+import servicesDataService from '../../services/services-data.service';
+//store
+import { useAppDispatch } from '../../utils/hooks';
+import { setYearsAction } from '../../store/slices/app-slice';
+//variables
+import { yearsRangeValuesNames } from '../../variables/variables';
+//types
+import type { IYearsRangeDataType } from '../../types/data-types';
 //styles
 import './year-range.scss';
 
-const enum rangeValuesNames {
-	A = 'a',
-	B = 'b',
-}
-
-interface IRangeValuesStateType {
-	[rangeValuesNames.A]: number;
-	[rangeValuesNames.B]: number;
-}
-
 const YearRange = (): JSX.Element => {
-	const MIN_VALUE = 2020;
-	const MAX_VALUE = 2025;
-	const RANGE_STEP = 1;
+	const servicesYearsData = servicesDataService.getYears();
+	const MIN_YEAR = Math.min(...servicesYearsData);
+	const MAX_YEAR = Math.max(...servicesYearsData);
+	const YEAR_RANGE_STEP = 1;
 
-	const initialRangeState: IRangeValuesStateType = {
-		[rangeValuesNames.A]: MIN_VALUE,
-		[rangeValuesNames.B]: MAX_VALUE,
+	const dispatch = useAppDispatch();
+
+	const initialRangeState: IYearsRangeDataType = {
+		[yearsRangeValuesNames.A]: MIN_YEAR,
+		[yearsRangeValuesNames.B]: MAX_YEAR,
 	};
 
-	const [rangeValues, setRangeValues] = useState<IRangeValuesStateType>(initialRangeState);
+	const [rangeValues, setRangeValues] = useState<IYearsRangeDataType>(initialRangeState);
 
 	const handleInput = (event: ChangeEvent<HTMLInputElement>) => {
-		const et = event.target;
+		const evt = event.target;
 
 		setRangeValues({
 			...rangeValues,
-			[et.id]: +et.value,
+			[evt.id]: +evt.value,
 		});
 	};
+
+	useEffect(() => {
+		dispatch(setYearsAction({ years: rangeValues }));
+	}, [rangeValues]);
 
 	return (
 		<div className='year-range'>
@@ -41,8 +47,8 @@ const YearRange = (): JSX.Element => {
 					{
 						'--a': rangeValues.a,
 						'--b': rangeValues.b,
-						'--min': MIN_VALUE,
-						'--max': MAX_VALUE,
+						'--min': MIN_YEAR,
+						'--max': MAX_YEAR,
 					} as CSSProperties
 				}
 			>
@@ -62,13 +68,13 @@ const YearRange = (): JSX.Element => {
 					<input
 						onInput={handleInput}
 						className='year-range__input'
-						id={rangeValuesNames.A}
+						id={yearsRangeValuesNames.A}
 						name='price-range'
 						type='range'
-						min={MIN_VALUE}
+						min={MIN_YEAR}
 						value={rangeValues.a}
-						max={MAX_VALUE}
-						step={RANGE_STEP}
+						max={MAX_YEAR}
+						step={YEAR_RANGE_STEP}
 					/>
 					<label
 						className='year-range__label year-range__label--b'
@@ -83,13 +89,13 @@ const YearRange = (): JSX.Element => {
 					<input
 						onInput={handleInput}
 						className='year-range__input'
-						id={rangeValuesNames.B}
+						id={yearsRangeValuesNames.B}
 						name='price-range'
 						type='range'
-						min={MIN_VALUE}
+						min={MIN_YEAR}
 						value={rangeValues.b}
-						max={MAX_VALUE}
-						step={RANGE_STEP}
+						max={MAX_YEAR}
+						step={YEAR_RANGE_STEP}
 					/>
 				</div>
 			</div>

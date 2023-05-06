@@ -1,0 +1,34 @@
+.selected-years {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	justify-content: center;
+}
+
+.selected-years__years {
+	display: flex;
+	gap: 10px;
+	justify-content: flex-start;
+	align-items: center;
+}
+
+.selected-years__title {
+	font-family: var(--basic-font);
+	font-size: var(--selected-years-title-size);
+	font-weight: var(--selected-years-title-weight);
+	color: var(--text-primary);
+}
+
+.selected-years__description {
+	font-family: var(--basic-font);
+	font-size: var(--selected-years-text-size);
+	font-weight: var(--selected-years-text-weight);
+	color: var(--text-primary);
+}
+
+.selected-years__years {
+	font-family: var(--basic-font);
+	font-size: var(--selected-years-text-size);
+	font-weight: calc(var(--selected-years-text-weight) + 100);
+	color: var(--text-primary);
+}
