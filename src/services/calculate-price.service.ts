@@ -2,16 +2,41 @@
 import { getFullYearsFromRange, transformYearsRangeToArray } from '../utils/utils';
 //types
 // import type { ServicesItemsType, IServiceItemType } from '../types/services-data-types';
-import type { IYearsRangeDataType } from '../types/data-types';
+import type { IYearsRangeDataType, IServicesType, IPackageType } from '../types/data-types';
 
 // type test = boolean | IServiceItemType;
 
-interface ICalculateReturnType {
-	price: number;
-	recomendationForClient: string[];
+interface ICalculatePriceParamsType {
+	services: IServicesType;
+	years: IYearsRangeDataType;
+	packageItem: IPackageType | null;
 }
 
 class CalculatePriceService {
+	calculate({ services, years, packageItem }: ICalculatePriceParamsType): number {
+		let resultPrise = 0;
+		const allYears = getFullYearsFromRange(years);
+
+		services.forEach((serviceItem) => {
+			for (const year of allYears) {
+				const price = serviceItem.prices[year];
+				if (price) {
+					resultPrise += price;
+				}
+			}
+		});
+
+		if (packageItem !== null) {
+			for (const year of allYears) {
+				const price = packageItem.prices[year];
+				if (price) {
+					resultPrise += price;
+				}
+			}
+		}
+
+		return resultPrise;
+	}
 	// calculate(services: ServicesItemsType, years: IYearsRangeDataType): ICalculateReturnType {
 	// 	console.log('start-----------------------------------------------------');
 	// 	const calculatedServices: IServiceItemType[] = [];

@@ -1,0 +1,23 @@
+.selected-package {
+	width: 100%;
+}
+.selected-services__header {
+	display: flex;
+	flex-direction: column-reverse;
+	align-items: flex-start;
+	justify-content: flex-start;
+}
+
+.selected-package__title {
+	font-family: var(--basic-font);
+	font-size: var(--selected-service-title-size);
+	font-weight: var(--selected-service-title-weight);
+	color: var(--text-primary);
+}
+
+.selected-services__package-name {
+	font-family: var(--basic-font);
+	font-size: var(--selected-service-text-size);
+	font-weight: var(--selected-service-text-weight);
+	color: var(--text-primary);
+}

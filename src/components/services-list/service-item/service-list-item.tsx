@@ -25,6 +25,8 @@ const ServiceListItem = ({
 	const selectedServices = useAppSelector(SelectorGetServicesState);
 	const selectedPackage: IPackageType | null = useAppSelector(SelectorGetPackagesState);
 
+	const dispatch = useAppDispatch();
+
 	const [disabled, setDisabled] = useState<boolean>(false);
 
 	const checkServicesInPackage = (): boolean => {
@@ -56,7 +58,16 @@ const ServiceListItem = ({
 				}
 			});
 
-			requiredServiceIsSelected ? setDisabled(false) : setDisabled(true);
+			if (requiredServiceIsSelected) {
+				setDisabled(false);
+			} else {
+				setDisabled(true);
+
+				if (selectedServices.find((prevItem) => prevItem.id === serviceItem.id)) {
+					const result: IServicesType = selectedServices.filter((p) => p !== serviceItem);
+					dispatch(setServicesAction({ services: result }));
+				}
+			}
 		} else {
 			checkServicesInPackage();
 		}
