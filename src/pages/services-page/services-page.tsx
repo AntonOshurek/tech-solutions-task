@@ -1,5 +1,5 @@
 //components
-import { YearRange, ServicesList, SelectedResultat } from '../../components';
+import { YearRange, ServicesList, SelectedResultat, PackagesList } from '../../components';
 //styles
 import './services-page.scss';
 
@@ -10,6 +10,8 @@ const ServicesPage = (): JSX.Element => {
 				<h1>Choice your service</h1>
 
 				<YearRange />
+
+				<PackagesList />
 
 				<ServicesList />
 

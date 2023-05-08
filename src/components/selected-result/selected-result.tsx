@@ -7,7 +7,7 @@ import SelectedServices from './selected-services/selected-services';
 import { useAppSelector } from '../../utils/hooks';
 import { SelectorGetServicesState, SelectorGetYearsState } from '../../store/selectors/selectors';
 //types
-import type { ServicesItemsType } from '../../types/services-data-types';
+import type { IServicesType, IYearsRangeDataType } from '../../types/data-types';
 //styles
 import './selected-result.scss';
 
@@ -17,13 +17,13 @@ interface ICalculateReturnType {
 }
 
 const SelectedResultat = (): JSX.Element => {
-	const selectedServices: ServicesItemsType = useAppSelector(SelectorGetServicesState);
-	const selectedYears = useAppSelector(SelectorGetYearsState);
+	const selectedServices: IServicesType = useAppSelector(SelectorGetServicesState);
+	const selectedYears: IYearsRangeDataType = useAppSelector(SelectorGetYearsState);
 
-	const result: ICalculateReturnType = calculatePriceService.calculate(
-		selectedServices,
-		selectedYears,
-	);
+	// const result: ICalculateReturnType = calculatePriceService.calculate(
+	// 	selectedServices,
+	// 	selectedYears,
+	// );
 
 	return (
 		<section className='services-result'>
@@ -32,10 +32,10 @@ const SelectedResultat = (): JSX.Element => {
 			<SelectedYears years={selectedYears} />
 			<SelectedServices selectedServices={selectedServices} />
 
-			<p>{result.price ? `Całkowity koszt usług - ${result.price} zł` : null}</p>
+			{/* <p>{result.price ? `Całkowity koszt usług - ${result.price} zł` : null}</p>
 			{result.recomendationForClient.map((item, i) => (
 				<p key={item + i}>{item} - będzie taniej!</p>
-			))}
+			))} */}
 		</section>
 	);
 };

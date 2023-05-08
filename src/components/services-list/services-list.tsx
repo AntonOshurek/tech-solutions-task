@@ -1,25 +1,27 @@
-import { ChangeEvent, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 //services
-import servicesDataService from '../../services/services-data.service';
+import servicesDataService from '../../services/data.service';
 //components
 import ServiceListItem from './service-item/service-list-item';
 //store
-import { useAppDispatch } from '../../utils/hooks';
+import { useAppDispatch, useAppSelector } from '../../utils/hooks';
 import { setServicesAction } from '../../store/slices/app-slice';
+import { SelectorGetPackagesState } from '../../store/selectors/selectors';
 //types
-import type { IServiceItemType, ServicesItemsType } from '../../types/services-data-types';
+import type { IPackageType, IServicesType, IServiceType } from '../../types/data-types';
 //styles
 import './services-list.scss';
 
 const ServicesList = (): JSX.Element => {
-	const servicesData = servicesDataService.getServices();
+	const servicesData: IServicesType = servicesDataService.getServices();
+	const selectedPackage: IPackageType | null = useAppSelector(SelectorGetPackagesState);
 	const dispatch = useAppDispatch();
 
-	const [checkedService, setCheckedService] = useState<ServicesItemsType>([]);
+	const [checkedService, setCheckedService] = useState<IServicesType | []>([]);
 
-	const onServiceInputHandler = (item: IServiceItemType): void => {
+	const onServiceInputHandler = (item: IServiceType): void => {
 		setCheckedService((prev) => {
-			let result: ServicesItemsType;
+			let result: IServicesType;
 			if (prev.find((prevItem) => prevItem.id === item.id)) {
 				result = prev.filter((p) => p !== item);
 			} else {
@@ -33,9 +35,20 @@ const ServicesList = (): JSX.Element => {
 		dispatch(setServicesAction({ services: checkedService }));
 	}, [checkedService]);
 
+	useEffect(() => {
+		if (selectedPackage !== null) {
+			setCheckedService((prev) => {
+				const newServices: IServicesType = prev.filter((item) => {
+					selectedPackage.servicesInside.includes(item.value) ? null : item;
+				});
+				return newServices;
+			});
+		}
+	}, [selectedPackage]);
+
 	return (
 		<div className='services-list'>
-			<h2 className='services-list__title'>Wybierz usługę</h2>
+			<h2 className='services-list__title'>Wybierz serwis</h2>
 
 			<ul className='services-list__list'>
 				{servicesData.map((service) => (

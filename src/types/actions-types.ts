@@ -1,9 +1,12 @@
 //types
-import type { IYearsRangeDataType } from './data-types';
-import type { ServicesItemsType } from './services-data-types';
+import type { IYearsRangeDataType, IServicesType, IPackageType } from './data-types';
 
 export interface ISetServicesActionType {
-	services: ServicesItemsType;
+	services: IServicesType;
+}
+
+export interface ISetPackagesActionType {
+	pack: IPackageType | null;
 }
 
 export interface ISetYearsActionType {

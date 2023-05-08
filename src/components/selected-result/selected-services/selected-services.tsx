@@ -1,10 +1,10 @@
 //types
-import type { ServicesItemsType } from '../../../types/services-data-types';
+import { IServicesType } from '../../../types/data-types';
 //styles
 import './selected-services.scss';
 
 interface ISelectedServicesPropsType {
-	selectedServices: ServicesItemsType;
+	selectedServices: IServicesType;
 }
 
 const SelectedServices = ({ selectedServices }: ISelectedServicesPropsType): JSX.Element => {

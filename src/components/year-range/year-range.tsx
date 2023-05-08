@@ -1,6 +1,6 @@
 import { CSSProperties, ChangeEvent, useEffect, useState } from 'react';
 //services
-import servicesDataService from '../../services/services-data.service';
+import servicesDataService from '../../services/data.service';
 //store
 import { useAppDispatch } from '../../utils/hooks';
 import { setYearsAction } from '../../store/slices/app-slice';
