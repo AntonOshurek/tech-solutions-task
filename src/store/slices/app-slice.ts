@@ -2,7 +2,11 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 //data
 import { appStoreData } from '../store-data/app-store-data';
 //types
-import type { ISetYearsActionType, ISetServicesActionType } from '../../types/actions-types';
+import type {
+	ISetYearsActionType,
+	ISetServicesActionType,
+	ISetPackagesActionType,
+} from '../../types/actions-types';
 import type { AppThunk } from '../../types/store-types';
 
 export const appSlice = createSlice({
@@ -13,6 +17,10 @@ export const appSlice = createSlice({
 		setServices: (state, action: PayloadAction<ISetServicesActionType>) => {
 			const { services } = action.payload;
 			state.services = services;
+		},
+		setPackages: (state, action: PayloadAction<ISetPackagesActionType>) => {
+			const { pack } = action.payload;
+			state.pack = pack;
 		},
 		setYears: (state, action: PayloadAction<ISetYearsActionType>) => {
 			const { years } = action.payload;
@@ -27,6 +35,12 @@ export const setServicesAction =
 	(action: ISetServicesActionType): AppThunk =>
 	(dispatch, getState) => {
 		dispatch(appSlice.actions.setServices(action));
+	};
+
+export const setPackagesAction =
+	(action: ISetPackagesActionType): AppThunk =>
+	(dispatch, getState) => {
+		dispatch(appSlice.actions.setPackages(action));
 	};
 
 export const setYearsAction =

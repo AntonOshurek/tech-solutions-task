@@ -1,8 +1,8 @@
 //types
-import type { IYearsRangeDataType } from './data-types';
-import type { ServicesItemsType } from './services-data-types';
+import type { IServicesType, IYearsRangeDataType, IPackageType } from './data-types';
 
 export interface IStoreDataType {
-	services: ServicesItemsType;
+	services: IServicesType;
+	pack: IPackageType | null;
 	yearsRange: IYearsRangeDataType;
 }
