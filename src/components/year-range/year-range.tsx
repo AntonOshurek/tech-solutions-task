@@ -26,7 +26,7 @@ const YearRange = (): JSX.Element => {
 
 	const [rangeValues, setRangeValues] = useState<IYearsRangeDataType>(initialRangeState);
 
-	const handleInput = (event: ChangeEvent<HTMLInputElement>) => {
+	const handleInput = (event: ChangeEvent<HTMLInputElement>): void => {
 		const evt = event.target;
 
 		setRangeValues({
