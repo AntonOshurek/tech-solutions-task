@@ -24,6 +24,7 @@ export type IServicesType = IServiceType[];
 export interface IPackageType {
 	name: string;
 	servicesInside: string[];
+	freeService?: string[];
 	id: string;
 	value: string;
 	prices: IPricesType;

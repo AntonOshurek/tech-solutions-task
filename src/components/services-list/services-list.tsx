@@ -40,7 +40,14 @@ const ServicesList = (): JSX.Element => {
 		if (selectedPackage !== null) {
 			setCheckedService((prev) => {
 				const newServices: IServicesType = prev.filter((item) => {
-					return selectedPackage.servicesInside.includes(item.value) ? null : item;
+					if (
+						selectedPackage.servicesInside.includes(item.value) ||
+						selectedPackage.freeService?.includes(item.value)
+					) {
+						return null;
+					} else {
+						return item;
+					}
 				});
 				return newServices;
 			});
