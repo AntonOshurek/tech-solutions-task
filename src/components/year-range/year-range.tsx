@@ -3,7 +3,7 @@ import { CSSProperties, ChangeEvent, useEffect, useState } from 'react';
 import servicesDataService from '../../services/data.service';
 //store
 import { useAppDispatch } from '../../utils/hooks';
-import { setYearsAction } from '../../store/slices/app-slice';
+import { setYearsRangeAction } from '../../store/slices/app-slice';
 //variables
 import { yearsRangeValuesNames } from '../../variables/variables';
 //types
@@ -36,7 +36,7 @@ const YearRange = (): JSX.Element => {
 	};
 
 	useEffect(() => {
-		dispatch(setYearsAction({ years: rangeValues }));
+		dispatch(setYearsRangeAction({ years: rangeValues }));
 	}, [rangeValues]);
 
 	return (

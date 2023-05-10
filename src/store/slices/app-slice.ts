@@ -5,7 +5,7 @@ import { appStoreData } from '../store-data/app-store-data';
 import type {
 	ISetYearsActionType,
 	ISetServicesActionType,
-	ISetPackagesActionType,
+	ISetPackageActionType,
 } from '../../types/actions-types';
 import type { AppThunk } from '../../types/store-types';
 
@@ -18,18 +18,18 @@ export const appSlice = createSlice({
 			const { services } = action.payload;
 			state.services = services;
 		},
-		setPackages: (state, action: PayloadAction<ISetPackagesActionType>) => {
+		setPackage: (state, action: PayloadAction<ISetPackageActionType>) => {
 			const { pack } = action.payload;
 			state.pack = pack;
 		},
-		setYears: (state, action: PayloadAction<ISetYearsActionType>) => {
+		setYearsRange: (state, action: PayloadAction<ISetYearsActionType>) => {
 			const { years } = action.payload;
 			state.yearsRange = years;
 		},
 	},
 });
 
-export const { setServices, setYears } = appSlice.actions;
+// export const { setServices, setPackage, setYearsRange } = appSlice.actions;
 
 export const setServicesAction =
 	(action: ISetServicesActionType): AppThunk =>
@@ -37,16 +37,16 @@ export const setServicesAction =
 		dispatch(appSlice.actions.setServices(action));
 	};
 
-export const setPackagesAction =
-	(action: ISetPackagesActionType): AppThunk =>
+export const setPackageAction =
+	(action: ISetPackageActionType): AppThunk =>
 	(dispatch, getState) => {
-		dispatch(appSlice.actions.setPackages(action));
+		dispatch(appSlice.actions.setPackage(action));
 	};
 
-export const setYearsAction =
+export const setYearsRangeAction =
 	(action: ISetYearsActionType): AppThunk =>
 	(dispatch, getState) => {
-		dispatch(appSlice.actions.setYears(action));
+		dispatch(appSlice.actions.setYearsRange(action));
 	};
 
 export default appSlice.reducer;

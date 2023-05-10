@@ -3,21 +3,24 @@ import { useEffect, useState } from 'react';
 import PackageListItem from './package-item/package-list-item';
 //services
 import servicesDataService from '../../services/data.service';
+//utils
+import { compareStringArrays } from '../../utils/utils';
 //store
 import { useAppDispatch, useAppSelector } from '../../utils/hooks';
-import { setPackagesAction } from '../../store/slices/app-slice';
+import { setPackageAction } from '../../store/slices/app-slice';
 import { SelectorGetServicesState } from '../../store/selectors/selectors';
 //types
-import { IPackagesType, IPackageType } from '../../types/data-types';
+import type { IPackagesType, IPackageType, IServicesType } from '../../types/data-types';
+import type { PackageStoreDataType } from '../../types/store-data-types';
 //styles
 import './packages-list.scss';
 
 const PackagesList = (): JSX.Element => {
 	const packagesData: IPackagesType = servicesDataService.getPackages();
-	const selectedServices = useAppSelector(SelectorGetServicesState);
+	const selectedServices: IServicesType = useAppSelector(SelectorGetServicesState);
 	const dispatch = useAppDispatch();
 
-	const [checkedPackage, setCheckedPackage] = useState<IPackageType | null>(null);
+	const [checkedPackage, setCheckedPackage] = useState<PackageStoreDataType>(null);
 
 	const onServiceInputHandler = (item: IPackageType): void => {
 		if (JSON.stringify(checkedPackage) === JSON.stringify(item)) {
@@ -27,32 +30,14 @@ const PackagesList = (): JSX.Element => {
 		}
 	};
 
-	function compareArrays(arr1: string[], arr2: string[]): boolean {
-		// if (arr1.length !== arr2.length) {
-		// 	return false;
-		// }
-		// const arr1Sorted = arr1.slice().sort();
-		// const arr2Sorted = arr2.slice().sort();
-		// return arr1Sorted.every((val, index) => val === arr2Sorted[index]);
-
-		const set1 = new Set(arr1);
-		const set2 = new Set(arr2);
-		return Array.from(set1).every((val) => set2.has(val));
-	}
-
 	useEffect(() => {
-		if (checkedPackage !== null) {
-			dispatch(setPackagesAction({ pack: checkedPackage }));
-		} else {
-			dispatch(setPackagesAction({ pack: null }));
-		}
+		dispatch(setPackageAction({ pack: checkedPackage }));
 	}, [checkedPackage]);
 
 	useEffect(() => {
 		const selectedServicesArray = selectedServices.map((item) => item.value);
-
 		for (const pack of packagesData) {
-			if (compareArrays(pack.servicesInside, selectedServicesArray)) {
+			if (compareStringArrays(pack.servicesInside, selectedServicesArray)) {
 				setCheckedPackage(pack);
 				break;
 			}

@@ -22,6 +22,7 @@ const ServiceListItem = ({
 	serviceItem,
 	checked,
 }: IServiceItemPropsType): JSX.Element => {
+	const { required, value, id, name } = serviceItem;
 	const selectedServices = useAppSelector(SelectorGetServicesState);
 	const selectedPackage: IPackageType | null = useAppSelector(SelectorGetPackagesState);
 
@@ -29,29 +30,15 @@ const ServiceListItem = ({
 
 	const [disabled, setDisabled] = useState<boolean>(false);
 
-	const checkServicesInPackage = (): boolean => {
-		let checkResult: boolean;
-
-		if (selectedPackage !== null) {
-			if (selectedPackage.servicesInside.includes(serviceItem.value)) {
-				checkResult = true;
-				setDisabled(true);
-			} else {
-				checkResult = false;
-				setDisabled(false);
-			}
-		} else {
-			checkResult = false;
-			setDisabled(false);
-		}
-
-		return checkResult;
-	};
-
 	useEffect(() => {
-		if (serviceItem.required && !checkServicesInPackage()) {
+		//sprawdzamy, czy mamy serwis w pakiecie usług?
+		const serviceIncludeInPackage = selectedPackage?.servicesInside.includes(value) ? true : false;
+
+		//esli mamy znacznik required i nie mamy serwisu w wybranym pakiecie...
+		if (required && !serviceIncludeInPackage) {
+			//wtedy sprawdzamy, czy serwis który jest potrzebny do wyboru naszego serwisu, jest wybrany czy nie?
 			const requiredServiceIsSelected = selectedServices.find((element) => {
-				if (element.value === serviceItem.required) {
+				if (element.value === required) {
 					return true;
 				} else {
 					return false;
@@ -59,24 +46,32 @@ const ServiceListItem = ({
 			});
 
 			if (requiredServiceIsSelected) {
+				//jeśli serwis, który jest potrzeby do odblokowania naszego serwisu jest już wybrany, to nie robimy disabled
 				setDisabled(false);
 			} else {
+				//jeśli nie jest wybrany, to robimy disabled
 				setDisabled(true);
 
-				if (selectedServices.find((prevItem) => prevItem.id === serviceItem.id)) {
+				//jeśli serwis powinien być disabled, to trzeba go usunąć ze stor'a aplikacji
+				if (selectedServices.find((prevItem) => prevItem.id === id)) {
 					const result: IServicesType = selectedServices.filter((p) => p !== serviceItem);
 					dispatch(setServicesAction({ services: result }));
 				}
 			}
 		} else {
-			checkServicesInPackage();
+			//jeśli nie mamy znaczniku "required" to tylko sprawdzamy obecność serwisu w wybranym pakiecie
+			if (serviceIncludeInPackage) {
+				setDisabled(true);
+			} else {
+				setDisabled(false);
+			}
 		}
 	}, [selectedServices, selectedPackage]);
 
 	// value classes added in styles, used for add svg icons and active icon class.
 	const disabledClass = disabled ? 'services-list__label--disabled' : '';
-	const basicStyleClasses = `services-list__label service-icon service-${serviceItem.value}-icon unselectable`;
-	const activeStyleClasses = `services-list__label service-icon service-${serviceItem.value}-icon services-list__label--active service-${serviceItem.value}-icon--active`;
+	const basicStyleClasses = `services-list__label service-icon service-${value}-icon unselectable`;
+	const activeStyleClasses = `services-list__label service-icon service-${value}-icon services-list__label--active service-${serviceItem.value}-icon--active`;
 	const styleClasses = checked
 		? `${basicStyleClasses} ${activeStyleClasses} ${disabledClass}`
 		: `${basicStyleClasses} ${disabledClass}`;
@@ -87,16 +82,16 @@ const ServiceListItem = ({
 
 	return (
 		<li className='services-list__item'>
-			<label className={styleClasses} htmlFor={serviceItem.id}>
-				{serviceItem.name}
+			<label className={styleClasses} htmlFor={id}>
+				{name}
 			</label>
 			<input
 				onChange={onChoiceHandler}
 				className='visually-hidden'
 				type='checkbox'
-				id={serviceItem.id}
-				value={serviceItem.value}
-				name={serviceItem.value}
+				id={id}
+				value={value}
+				name={value}
 				checked={checked}
 				disabled={disabled}
 			/>

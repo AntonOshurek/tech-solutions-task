@@ -6,19 +6,16 @@ import ServiceListItem from './service-item/service-list-item';
 //store
 import { useAppDispatch, useAppSelector } from '../../utils/hooks';
 import { setServicesAction } from '../../store/slices/app-slice';
-import {
-	SelectorGetPackagesState,
-	SelectorGetServicesState,
-} from '../../store/selectors/selectors';
+import { SelectorGetPackagesState } from '../../store/selectors/selectors';
 //types
-import type { IPackageType, IServicesType, IServiceType } from '../../types/data-types';
+import type { IServicesType, IServiceType } from '../../types/data-types';
+import type { PackageStoreDataType } from '../../types/store-data-types';
 //styles
 import './services-list.scss';
 
 const ServicesList = (): JSX.Element => {
 	const servicesData: IServicesType = servicesDataService.getServices();
-	const selectedServices = useAppSelector(SelectorGetServicesState);
-	const selectedPackage: IPackageType | null = useAppSelector(SelectorGetPackagesState);
+	const selectedPackage: PackageStoreDataType = useAppSelector(SelectorGetPackagesState);
 	const dispatch = useAppDispatch();
 
 	const [checkedService, setCheckedService] = useState<IServicesType>([]);
@@ -49,10 +46,6 @@ const ServicesList = (): JSX.Element => {
 			});
 		}
 	}, [selectedPackage]);
-
-	useEffect(() => {
-		setCheckedService(selectedServices);
-	}, [selectedServices]);
 
 	return (
 		<div className='services-list'>

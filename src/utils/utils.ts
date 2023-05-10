@@ -15,3 +15,9 @@ export const getFullYearsFromRange = (yearsRange: IYearsRangeDataType): number[]
 	const allYears = Array.from({ length: maxYear - minYear + 1 }, (_, index) => minYear + index);
 	return allYears;
 };
+
+export const compareStringArrays = (arr1: string[], arr2: string[]): boolean => {
+	const set1 = new Set(arr1);
+	const set2 = new Set(arr2);
+	return Array.from(set1).every((val) => set2.has(val));
+};
