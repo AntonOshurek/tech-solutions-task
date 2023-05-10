@@ -8,21 +8,26 @@ export interface IYearsRangeDataType {
 
 export type YearsDataType = number[];
 
+export interface IPricesType {
+	[year: number]: number;
+}
+
 export interface IServiceType {
 	name: string;
 	id: string;
 	value: string;
 	required?: string;
-	prices: { [year: number]: number };
+	prices: IPricesType;
 }
 export type IServicesType = IServiceType[];
 
 export interface IPackageType {
 	name: string;
 	servicesInside: string[];
+	freeService?: string[];
 	id: string;
 	value: string;
-	prices: { [year: number]: number };
+	prices: IPricesType;
 }
 
 export type IPackagesType = IPackageType[];

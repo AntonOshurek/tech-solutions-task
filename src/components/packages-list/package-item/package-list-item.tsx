@@ -1,6 +1,3 @@
-//store
-import { useAppSelector } from '../../../utils/hooks';
-import { SelectorGetServicesState } from '../../../store/selectors/selectors';
 //types
 import type { IPackageType } from '../../../types/data-types';
 //styles
@@ -17,11 +14,11 @@ const PackageListItem = ({
 	packageItem,
 	checked,
 }: IPackageItemPropsType): JSX.Element => {
-	// const selectedServices = useAppSelector(SelectorGetServicesState);
+	const { id, value, name } = packageItem;
 
 	// value classes added in styles, used for add svg icons and active icon class.
-	const basicStyleClasses = `packages-list__label packages-icon packages-${packageItem.value}-icon unselectable`;
-	const activeStyleClasses = `packages-list__label packages-icon packages-${packageItem.value}-icon packages-list__label--active packages-${packageItem.value}-icon--active`;
+	const basicStyleClasses = `packages-list__label packages-icon packages-${value}-icon unselectable`;
+	const activeStyleClasses = `packages-list__label packages-icon packages-${value}-icon packages-list__label--active packages-${packageItem.value}-icon--active`;
 	const styleClasses = checked
 		? `${basicStyleClasses} ${activeStyleClasses}`
 		: `${basicStyleClasses}`;
@@ -32,16 +29,16 @@ const PackageListItem = ({
 
 	return (
 		<li className='services-list__item'>
-			<label className={styleClasses} htmlFor={packageItem.id}>
-				{packageItem.name}
+			<label className={styleClasses} htmlFor={id}>
+				{name}
 			</label>
 			<input
 				onChange={onChoiceHandler}
 				className='visually-hidden'
 				type='checkbox'
-				id={packageItem.id}
-				value={packageItem.value}
-				name={packageItem.value}
+				id={id}
+				value={value}
+				name={value}
 				checked={checked}
 			/>
 		</li>

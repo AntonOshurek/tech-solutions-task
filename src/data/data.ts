@@ -28,7 +28,8 @@ export const data: IDataType = {
 	packages: [
 		{
 			name: 'Telewizja + Internet + Decoder 4K',
-			servicesInside: ['television', 'internet', 'decoder4k'],
+			servicesInside: ['television', 'internet'],
+			freeService: ['decoder4k'],
 			id: nanoid(),
 			value: 'package-telintdec',
 			prices: { 2023: 79, 2024: 89, 2025: 99 },
