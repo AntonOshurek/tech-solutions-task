@@ -2,7 +2,7 @@
 import { ServicesPage } from '../pages';
 
 // in this component we can use reacrRouterDom and create pages for this application
-function App() {
+function App(): JSX.Element {
 	return (
 		<>
 			<ServicesPage />
